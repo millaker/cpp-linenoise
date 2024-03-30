@@ -2131,7 +2131,8 @@ inline void linenoiseEditHistoryNext(struct linenoiseState *l, int dir) {
       return;
     }
     memset(l->buf, 0, l->buflen);
-    strcpy(l->buf, history[history.size() - 1 - l->history_index].c_str());
+    strncpy(l->buf, history[history.size() - 1 - l->history_index].c_str(),
+            l->buflen);
     l->len = l->pos = static_cast<int>(strlen(l->buf));
     refreshLine(l);
   }
