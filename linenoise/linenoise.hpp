@@ -159,7 +159,7 @@
 
 namespace linenoise {
 
-typedef std::function<void (const char*, std::vector<std::string>&)> CompletionCallback;
+typedef std::function<void (const char*, std::vector<std::string>*)> CompletionCallback;
 
 #ifdef _WIN32
 
@@ -1768,7 +1768,7 @@ inline int completeLine(struct linenoiseState *ls, char *cbuf, int *c) {
     int nread = 0, nwritten;
     *c = 0;
 
-    completionCallback(ls->buf,lc);
+    completionCallback(ls->buf,&lc);
     if (lc.empty()) {
         linenoiseBeep();
     } else {
